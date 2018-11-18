@@ -2,6 +2,7 @@
 import setAuthHeader from './setAuthHeader';
 import unsetAuthHeader from './unsetAuthHeader';
 import { login, logout } from './actions';
+import getCharacterId from './getCharacterId';
 
 export default function makeCheckLocalStorage({ axios, store }) {
   return function checkLocalStorage() {
@@ -12,7 +13,7 @@ export default function makeCheckLocalStorage({ axios, store }) {
     // If we have one, set the Authorization header
     if (access_token) {
       setAuthHeader({ access_token, axios });
-      return login()(store.dispatch);
+      return login(getCharacterId(access_token))(store.dispatch);
     }
 
     // Otherwise, ensure that the Authorization header is unset

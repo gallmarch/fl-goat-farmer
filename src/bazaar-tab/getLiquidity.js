@@ -1,16 +1,18 @@
 import { createSelector } from 'reselect';
 
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;
+const getExclusions = ({ persistence: { exclusions } }) => exclusions;
 const getQualities = ({ myself: { qualities } }) => qualities;
 
 const PENNY_QUALITY_ID = 22390;
 
-const inputs = [getAvailabilities, getQualities];
-const output = (availabilities, qualities) => {
+const inputs = [getAvailabilities, getExclusions, getQualities];
+const output = (availabilities, exclusions, qualities) => {
   // Get the actual number of Pennies
   const pennies = (qualities.find(q => q.id === PENNY_QUALITY_ID) || { level: 0 }).level;
-  // Get stuff that sells for Pennies (e.g., not Memories of Light)
+  // Get stuff that sells for Pennies (e.g., not Memories of Light) that isn't excluded
   const stuffThatSellsForPennies = availabilities
+    .filter(({ availability: { purchaseQuality: { id } } }) => !exclusions[id])
     .filter(({ availability: { purchaseQuality: { id } } }) => id === PENNY_QUALITY_ID);
 
   // Tot up its value

@@ -5,12 +5,7 @@ import { connect } from 'react-redux';
 
 import getLiquidity from './getLiquidity';
 
-export function Thing({ liquidity, qualities }) {
-  const stuff = qualities
-    .filter(q => q.nature === 'Thing')
-    .filter(q => q.category === 'Currency');
-  console.info(stuff[0]);
-
+export function Thing({ liquidity }) {
   return (
     <div className="flgf__total-wealth">
       Total Wealth:
@@ -23,11 +18,9 @@ export function Thing({ liquidity, qualities }) {
 
 Thing.propTypes = {
   liquidity: PropTypes.number.isRequired,
-  qualities: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 const mapStateToProps = state => ({
-  qualities: state.myself.qualities,
   liquidity: getLiquidity(state),
 });
 
