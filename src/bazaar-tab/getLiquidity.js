@@ -12,7 +12,7 @@ const output = (availabilities, exclusions, qualities) => {
   const pennies = (qualities.find(q => q.id === PENNY_QUALITY_ID) || { level: 0 }).level;
   // Get stuff that sells for Pennies (e.g., not Memories of Light) that isn't excluded
   const stuffThatSellsForPennies = availabilities
-    .filter(({ availability: { purchaseQuality: { id } } }) => !exclusions[id])
+    .filter(({ availability: { quality: { id } } }) => !exclusions[id])
     .filter(({ availability: { purchaseQuality: { id } } }) => id === PENNY_QUALITY_ID);
 
   // Tot up its value
