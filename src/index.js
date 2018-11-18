@@ -12,5 +12,4 @@ const store = applyMiddleware(thunk)(createStore)(reducer);
 
 addAuthListener({ store, storage });
 addBazaarTabListener({ store, storage });
-addExchangeItemChangeListener({ store });
-// getExclusions({ store, storage });
+addExchangeItemChangeListener({ store, storage });

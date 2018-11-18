@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import MutationSummary from 'mutation-summary';
 
-export default function addExchangeItemChangeListener({ store, storage }) {
-  // const toggleItemExclusion = getToggleItemExclusion({ storage });
+import { EXCLUSIONS_FETCHED } from '../persistence/action-types';
 
+export default function addExchangeItemChangeListener({ store, storage }) {
   const rootNode = document.querySelector('body');
   const queries = [{
     element: '.shop__item',
@@ -30,6 +31,13 @@ export default function addExchangeItemChangeListener({ store, storage }) {
         return;
       }
 
+      const qualityId = el.getAttribute('data-quality-id');
+
+      const { persistence: { exclusions } } = store.getState();
+      if (exclusions[qualityId]) {
+        el.classList.add('flgf--disabled');
+      }
+
       // Add an exclusion toggle
       el.querySelector('.icon > div').addEventListener('click', makeClickHandler(el));
 
@@ -41,8 +49,29 @@ export default function addExchangeItemChangeListener({ store, storage }) {
   function makeClickHandler(el) {
     return () => {
       const qualityId = el.getAttribute('data-quality-id');
-      console.info(`toggling exclusion for ${qualityId}`);
+      const {
+        auth: { characterId },
+        persistence: { exclusions, reserve },
+      } = store.getState();
+
       el.classList.toggle('flgf--disabled');
+
+      storage.set({
+        [characterId]: {
+          reserve,
+          exclusions: {
+            ...exclusions,
+            [qualityId]: !exclusions[qualityId],
+          },
+        },
+      });
+
+      storage.get(characterId, (stuff) => {
+        store.dispatch({
+          type: EXCLUSIONS_FETCHED,
+          payload: stuff[characterId],
+        });
+      });
     };
   }
 }
