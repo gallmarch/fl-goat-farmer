@@ -3,7 +3,7 @@ import MutationSummary from 'mutation-summary';
 import { EXCLUSIONS_FETCHED } from '../persistence/action-types';
 import fetchBazaarStuff from './fetchBazaarStuff';
 import fetchMyself from '../myself/fetchMyself';
-import insertThing from './insertThing';
+import insertExtensionUI from './insertExtensionUI';
 
 export default function addBazaarTabListener({ store, storage }) {
   const rootNode = document.querySelector('body');
@@ -29,7 +29,7 @@ function makeCallback({ store, storage }) {
     // Fetch character data
     fetchMyself({ store });
     // Add the extension UI
-    insertThing({ store });
+    insertExtensionUI({ store });
     // Get exclusions for this character ID
     const { auth: { characterId } } = store.getState();
     // Fetch stuff from storage

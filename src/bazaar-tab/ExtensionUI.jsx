@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import getLiquidity from './getLiquidity';
 
-export function Thing({ liquidity }) {
+export function ExtensionUI({ liquidity }) {
   return (
     <div className="flgf__total-wealth">
       Total Wealth:
@@ -16,7 +16,7 @@ export function Thing({ liquidity }) {
   );
 }
 
-Thing.propTypes = {
+ExtensionUI.propTypes = {
   liquidity: PropTypes.number.isRequired,
 };
 
@@ -24,4 +24,4 @@ const mapStateToProps = state => ({
   liquidity: getLiquidity(state),
 });
 
-export default connect(mapStateToProps)(Thing);
+export default connect(mapStateToProps)(ExtensionUI);
