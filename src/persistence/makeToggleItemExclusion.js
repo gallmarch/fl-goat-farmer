@@ -2,7 +2,7 @@ import getIsExcluded from './getIsExcluded';
 import makeItemKey from './makeItemKey';
 import getCharacterId from '../auth/getCharacterId';
 
-export default function getToggleItemExclusion({ storage }) {
+export default function makeToggleItemExclusion({ storage }) {
   const isExcluded = getIsExcluded({ storage });
   const characterId = getCharacterId();
 
