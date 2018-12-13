@@ -1,5 +1,5 @@
 import getIsExcluded from './getIsExcluded';
-import makeItemKey from './makeItemKey';
+import makeItemExclusionKey from './makeItemExclusionKey';
 import getCharacterId from '../auth/getCharacterId';
 
 export default function makeToggleItemExclusion({ storage }) {
@@ -7,13 +7,11 @@ export default function makeToggleItemExclusion({ storage }) {
   const characterId = getCharacterId();
 
   return function toggleItemExclusion(id) {
-    /*
-    const key = makeItemKey(id);
-    if (isExcluded(id)) {
+    const key = makeItemExclusionKey({ id, characterId });
+    if (isExcluded({ characterId, id })) {
       storage.removeItem(key);
       return;
     }
     storage.setItem(key, 'X');
-    */
   };
 }
