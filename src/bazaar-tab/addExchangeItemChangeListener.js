@@ -42,8 +42,6 @@ export default function addExchangeItemChangeListener({ store, storage }) {
     const activeMenuItem = document.querySelector('.menu-item--active');
     const sellMyThingsIsActive = !!activeMenuItem && activeMenuItem.innerText === 'Sell my things';
 
-    console.info(`sellMyThings? ${sellMyThingsIsActive}`);
-
     // Iterate over shop items, giving each a click listener
     [...document.querySelectorAll('.shop__item')].forEach((el) => {
       // Make an onClick for this element

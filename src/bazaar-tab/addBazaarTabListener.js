@@ -24,9 +24,6 @@ function makeCallback({ store, storage }) {
     const isActive = !!document.querySelector('[data-name="bazaar"].nav__item.active');
     const existingElement = !!document.querySelector('#flgf-root');
     if (!isActive || existingElement) {
-      if(isActive) {
-        console.info('element already exists');
-      }
       return;
     }
 
