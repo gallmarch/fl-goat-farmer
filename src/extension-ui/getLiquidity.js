@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
+import { PENNY_QUALITY_ID } from './constants';
+import getStuffThatSellsForPennies from './getStuffThatSellsForPennies';
 
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;
 const getExclusions = ({ persistence: { exclusions } }) => exclusions;
 const getQualities = ({ myself: { qualities } }) => qualities;
 const getReserve = ({ persistence: { reserve } }) => reserve;
-
-const PENNY_QUALITY_ID = 22390;
 
 const inputs = [getAvailabilities, getExclusions, getQualities, getReserve];
 
@@ -14,9 +14,7 @@ const output = (availabilities, exclusions, qualities, reserve) => {
   const pennies = (qualities.find(q => q.id === PENNY_QUALITY_ID) || { level: 0 }).level;
 
   // Get stuff that sells for Pennies (e.g., not Memories of Light) that isn't excluded
-  const stuffThatSellsForPennies = availabilities
-    .filter(({ availability: { quality: { id } } }) => !exclusions[id])
-    .filter(({ availability: { purchaseQuality: { id } } }) => id === PENNY_QUALITY_ID);
+  const stuffThatSellsForPennies = getStuffThatSellsForPennies(availabilities, exclusions);
 
   // Tot up its value
   const reduceFn = makeReducer(qualities, reserve);

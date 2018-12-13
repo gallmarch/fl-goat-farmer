@@ -22,13 +22,6 @@ export default function addExchangeItemChangeListener({ store, storage }) {
   function callback(summaries) {
     console.info('summaries');
     console.info(summaries);
-    // Return early if nothing was added
-    /*
-    const { added } = summaries[0];
-    if (!added) {
-      return;
-    }
-    */
 
     // Get the current list of exclusions from store
     const { persistence: { exclusions } } = store.getState();
