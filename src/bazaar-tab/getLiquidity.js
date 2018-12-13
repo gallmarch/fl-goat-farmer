@@ -16,12 +16,15 @@ const output = (availabilities, exclusions, qualities) => {
     .filter(({ availability: { purchaseQuality: { id } } }) => id === PENNY_QUALITY_ID);
 
   // Tot up its value
+  const reduceFn = makeReducer(qualities);
   const valueOfSellableStuff = stuffThatSellsForPennies.reduce(reduceFn, 0);
 
   // Return the sum
   return valueOfSellableStuff + pennies;
+};
 
-  function reduceFn(acc, next) {
+function makeReducer(qualities) {
+  return function reduceFn(acc, next) {
     const { availability: { sellPrice, quality: { id } } } = next;
     const quality = qualities.find(q => q.id === id);
     if (!quality) {
@@ -29,7 +32,7 @@ const output = (availabilities, exclusions, qualities) => {
     }
     const { level } = quality;
     return acc + (sellPrice * level);
-  }
-};
+  };
+}
 
 export default createSelector(inputs, output);
