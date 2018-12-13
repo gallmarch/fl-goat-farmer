@@ -4,6 +4,6 @@ node_js:
 before_script:
   - yarn add coveralls
 script:
-  - yarn test
+  - yarn test --coverage --verbose
 after_success:
   - cat coverage/lcov.info |./node_modules/coveralls/bin/coveralls.js
