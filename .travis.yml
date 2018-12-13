@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  "8"
+before_script:
+  - yarn add coveralls
+script:
+  -yarn test
+after_success:
+  - cat coverage/lcov.ingo |./node_modules/coveralls/bin/coveralls.js
