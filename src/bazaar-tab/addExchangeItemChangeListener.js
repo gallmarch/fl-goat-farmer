@@ -1,6 +1,7 @@
 /* eslint-disable no-alert, no-console */
 import MutationSummary from 'mutation-summary';
 
+import addReserveDisplay from './addReserveDisplay';
 import makeMakeIconClickHandler from './makeMakeIconClickHandler';
 import makeUpdateReserve from './makeUpdateReserve';
 
@@ -74,6 +75,9 @@ export default function addExchangeItemChangeListener({ store, storage }) {
         const amount = window.prompt('Enter the number of items you want to reserve.', reserve[qualityId] || 0);
         updateReserve({ qualityId, amount });
       });
+
+      // Add a 'Reserved: ' display
+      addReserveDisplay({ el, qualityId, store });
 
       // Set the flag; we're done
       el.classList.add('flgf-has-listener');
