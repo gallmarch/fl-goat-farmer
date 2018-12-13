@@ -8,14 +8,14 @@ import ExtensionUI from '../extension-ui/ExtensionUI';
  * Insert the extension's UI into the DOM, with the store as its provider
  * @param {Object} param0
  */
-export default function insertExtensionUI({ store }) {
+export default function insertExtensionUI({ store, storage }) {
   const parent = document.querySelector('.exchange__title').parentNode;
   const container = document.createElement('div');
   container.id = 'flgf-root';
   parent.insertBefore(container, parent.querySelector('hr'));
   ReactDOM.render(
     <Provider store={store}>
-      <ExtensionUI />
+      <ExtensionUI storage={storage} />
     </Provider>,
     container,
   );

@@ -6,7 +6,7 @@ export default function makeMakeIconClickHandler({ storage, store }) {
     const qualityId = el.getAttribute('data-quality-id');
     const {
       auth: { characterId },
-      persistence: { exclusions, reserve },
+      persistence: { exclusions, reserve, target },
     } = store.getState();
 
     // Toggle the display class
@@ -16,6 +16,7 @@ export default function makeMakeIconClickHandler({ storage, store }) {
     storage.set({
       [characterId]: {
         reserve,
+        target,
         exclusions: {
           ...exclusions,
           [qualityId]: !exclusions[qualityId],

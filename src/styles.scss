@@ -23,3 +23,27 @@
   bottom: .25rem;
   right: .5rem;
 }
+
+.flgf__wealth-and-target {
+  display: table;
+  font-weight: 700;
+}
+
+.flgf__total-wealth,
+.flgf__to-target {
+  display: table-row;
+}
+
+.flgf__label {
+  display: table-cell;
+  padding-right: .5rem;
+}
+
+.flgf__value {
+  display: table-cell;
+}
+
+.flgf__update-button.flgf__update-button {
+  display: table-cell;
+  padding-left: .5rem;
+}
