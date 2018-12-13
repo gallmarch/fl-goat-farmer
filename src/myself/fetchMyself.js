@@ -5,14 +5,14 @@ import {
   MYSELF_SUCCESS,
 } from './action-types';
 
+export const MYSELF_URL = '//api.fallenlondon.com/api/character/myself';
+
 export default fetchMyself(axios);
 
 export function fetchMyself(service) {
-  return ({ store }) => {
+  return async ({ store }) => {
     store.dispatch({ type: MYSELF_FETCHING });
-    service.get('//api.fallenlondon.com/api/character/myself')
-      .then(({ data }) => {
-        store.dispatch({ type: MYSELF_SUCCESS, payload: data });
-      });
+    const { data } = await service.get(MYSELF_URL);
+    store.dispatch({ type: MYSELF_SUCCESS, payload: data });
   };
 }
