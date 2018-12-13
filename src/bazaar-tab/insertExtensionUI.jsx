@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 
 import ExtensionUI from './ExtensionUI';
 
+/**
+ * Insert the extension's UI into the DOM, with the store as its provider
+ * @param {Object} param0
+ */
 export default function insertExtensionUI({ store }) {
   const parent = document.querySelector('.exchange__title').parentNode;
   const container = document.createElement('div');

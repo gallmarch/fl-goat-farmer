@@ -59,8 +59,6 @@ export default function addExchangeItemChangeListener({ store, storage }) {
       // otherwise, remove it (the element may be reused by React's render algorithm)
       if (exclusions[qualityId] && sellMyThingsIsActive) {
         el.classList.add('flgf--disabled');
-      } else {
-        // el.classList.remove('flgf--disabled');
       }
 
       // Add an exclusion toggle (i.e. all of this item is reserved)

@@ -3,12 +3,13 @@ import { createSelector } from 'reselect';
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;
 const getExclusions = ({ persistence: { exclusions } }) => exclusions;
 const getQualities = ({ myself: { qualities } }) => qualities;
+const getReserve = ({ persistence: { reserve } }) => reserve;
 
 const PENNY_QUALITY_ID = 22390;
 
-const inputs = [getAvailabilities, getExclusions, getQualities];
+const inputs = [getAvailabilities, getExclusions, getQualities, getReserve];
 
-const output = (availabilities, exclusions, qualities) => {
+const output = (availabilities, exclusions, qualities, reserve) => {
   // Get the actual number of Pennies that the user owns
   const pennies = (qualities.find(q => q.id === PENNY_QUALITY_ID) || { level: 0 }).level;
 
@@ -18,22 +19,28 @@ const output = (availabilities, exclusions, qualities) => {
     .filter(({ availability: { purchaseQuality: { id } } }) => id === PENNY_QUALITY_ID);
 
   // Tot up its value
-  const reduceFn = makeReducer(qualities);
+  const reduceFn = makeReducer(qualities, reserve);
   const valueOfSellableStuff = stuffThatSellsForPennies.reduce(reduceFn, 0);
 
   // Return the sum
   return valueOfSellableStuff + pennies;
 };
 
-function makeReducer(qualities) {
+function makeReducer(qualities, reserve) {
   return function reduceFn(acc, next) {
+    // Get the sell price and quality ID for this availability
     const { availability: { sellPrice, quality: { id } } } = next;
     const quality = qualities.find(q => q.id === id);
+    // If something has gone wrong here, just return gracefully
     if (!quality) {
       return acc;
     }
+    // Get the number of this item in our possession
     const { level } = quality;
-    return acc + (sellPrice * level);
+    // Get the number we've reserved
+    const reserveLevel = reserve[id] || 0;
+    // Return the running total plus the value of whatever isn't reserved
+    return acc + (sellPrice * Math.max(0, level - reserveLevel));
   };
 }
 
