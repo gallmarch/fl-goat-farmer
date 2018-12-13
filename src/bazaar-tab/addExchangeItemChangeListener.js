@@ -1,9 +1,9 @@
 /* eslint-disable no-alert, no-console */
 import MutationSummary from 'mutation-summary';
 
-import addReserveDisplay from './addReserveDisplay';
+import addReserveDisplay from '../reserve/addReserveDisplay';
 import makeMakeIconClickHandler from './makeMakeIconClickHandler';
-import makeUpdateReserve from './makeUpdateReserve';
+import makeUpdateReserve from '../reserve/makeUpdateReserve';
 
 export default function addExchangeItemChangeListener({ store, storage }) {
   const rootNode = document.querySelector('body');
