@@ -26,6 +26,7 @@
 
 .flgf__wealth-and-target {
   display: table;
+  font-weight: 700;
 }
 
 .flgf__total-wealth,
@@ -35,7 +36,7 @@
 
 .flgf__label {
   display: table-cell;
-  margin-right: .5rem;
+  padding-right: .5rem;
 }
 
 .flgf__value {
@@ -44,5 +45,5 @@
 
 .flgf__update-button {
   display: table-cell;
-  margin-left: .5rem;
+  padding-left: .5rem;
 }
