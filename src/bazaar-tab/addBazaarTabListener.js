@@ -34,7 +34,7 @@ function makeCallback({ store, storage }) {
     fetchMyself({ store });
 
     // Add the extension UI
-    insertExtensionUI({ store });
+    insertExtensionUI({ store, storage });
 
     // Get exclusions for this character ID
     const { auth: { characterId } } = store.getState();

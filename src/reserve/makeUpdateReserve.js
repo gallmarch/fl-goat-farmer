@@ -6,12 +6,13 @@ export default function makeUpdateReserve({ store, storage }) {
   return ({ amount, qualityId }) => {
     const {
       auth: { characterId },
-      persistence: { exclusions, reserve },
+      persistence: { exclusions, reserve, target },
     } = store.getState();
 
     storage.set({
       [characterId]: {
         exclusions,
+        target,
         reserve: {
           ...reserve,
           [qualityId]: parseAmount(amount),

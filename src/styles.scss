@@ -23,3 +23,26 @@
   bottom: .25rem;
   right: .5rem;
 }
+
+.flgf__wealth-and-target {
+  display: table;
+}
+
+.flgf__total-wealth,
+.flgf__to-target {
+  display: table-row;
+}
+
+.flgf__label {
+  display: table-cell;
+  margin-right: .5rem;
+}
+
+.flgf__value {
+  display: table-cell;
+}
+
+.flgf__update-button {
+  display: table-cell;
+  margin-left: .5rem;
+}
