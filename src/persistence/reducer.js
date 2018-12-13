@@ -2,13 +2,13 @@ import {
   EXCLUSIONS_FETCHED,
 } from './action-types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   exclusions: {},
   reserve: {},
   target: 0,
 };
 
-export default function reducer(state = INITIAL_STATE, { type, payload }) {
+export default function reducer(state = INITIAL_STATE, { type, payload } = {}) {
   switch (type) {
     case EXCLUSIONS_FETCHED:
       return {
