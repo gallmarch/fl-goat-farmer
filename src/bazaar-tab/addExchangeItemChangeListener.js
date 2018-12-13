@@ -14,7 +14,7 @@ export default function addExchangeItemChangeListener({ store, storage }) {
     callback,
   });
 
-  function callback(summaries) {
+  function callback() {
     // Return early if nothing was added
     /*
     const { added } = summaries[0];
@@ -70,6 +70,7 @@ export default function addExchangeItemChangeListener({ store, storage }) {
       reserveButton.addEventListener('click', () => {
         const { persistence: { reserve } } = store.getState();
         const amount = window.prompt('Enter the number of items you want to reserve.', reserve[qualityId] || 0);
+        updateReserve({ qualityId, amount });
       });
 
       // Set the flag; we're done
