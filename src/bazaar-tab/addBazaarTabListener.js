@@ -3,7 +3,7 @@ import MutationSummary from 'mutation-summary';
 import { EXCLUSIONS_FETCHED } from '../persistence/action-types';
 import fetchBazaarStuff from './fetchBazaarStuff';
 import fetchMyself from '../myself/fetchMyself';
-import insertExtensionUI from './insertExtensionUI';
+import insertExtensionUI from '../extension-ui/insertExtensionUI';
 
 export default function addBazaarTabListener({ store, storage }) {
   const rootNode = document.querySelector('body');

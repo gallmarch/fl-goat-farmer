@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import ExtensionUI from './ExtensionUI';
+import ExtensionUI from '../extension-ui/ExtensionUI';
 
 /**
  * Insert the extension's UI into the DOM, with the store as its provider
