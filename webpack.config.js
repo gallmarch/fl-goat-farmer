@@ -38,6 +38,7 @@ const zip = new ZipPlugin({
 module.exports = {
   entry: {
     'content-script.js': './src/index.js',
+    'background.js': './src/background.js',
   },
   output: {
     path: './build/',

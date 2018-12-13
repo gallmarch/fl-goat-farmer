@@ -8,6 +8,10 @@
     "*://*.fallenlondon.com/"
   ],
   "version": "VERSION",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
   "content_scripts": [
     {
       "matches": [

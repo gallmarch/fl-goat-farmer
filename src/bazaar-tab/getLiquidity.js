@@ -7,9 +7,11 @@ const getQualities = ({ myself: { qualities } }) => qualities;
 const PENNY_QUALITY_ID = 22390;
 
 const inputs = [getAvailabilities, getExclusions, getQualities];
+
 const output = (availabilities, exclusions, qualities) => {
-  // Get the actual number of Pennies
+  // Get the actual number of Pennies that the user owns
   const pennies = (qualities.find(q => q.id === PENNY_QUALITY_ID) || { level: 0 }).level;
+
   // Get stuff that sells for Pennies (e.g., not Memories of Light) that isn't excluded
   const stuffThatSellsForPennies = availabilities
     .filter(({ availability: { quality: { id } } }) => !exclusions[id])

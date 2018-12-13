@@ -6,15 +6,21 @@ import makeUpdateReserve from './makeUpdateReserve';
 
 export default function addExchangeItemChangeListener({ store, storage }) {
   const rootNode = document.querySelector('body');
-  const queries = [{ element: '.shop__item' }];
+  const queries = [
+    // { element: '.shop__item' },
+    { element: '.shop__item' },
+  ];
 
+  console.info('adding a listener for exchange items');
   return new MutationSummary({
     rootNode,
     queries,
     callback,
   });
 
-  function callback() {
+  function callback(summaries) {
+    console.info('summaries');
+    console.info(summaries);
     // Return early if nothing was added
     /*
     const { added } = summaries[0];
@@ -34,7 +40,7 @@ export default function addExchangeItemChangeListener({ store, storage }) {
 
     // Check which shop is active; if it's not "Sell my things" then return
     const activeMenuItem = document.querySelector('.menu-item--active');
-    const sellMyThingsIsActive = activeMenuItem.innerText === 'Sell my things';
+    const sellMyThingsIsActive = !!activeMenuItem && activeMenuItem.innerText === 'Sell my things';
 
     console.info(`sellMyThings? ${sellMyThingsIsActive}`);
 

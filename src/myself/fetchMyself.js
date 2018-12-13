@@ -12,8 +12,6 @@ export function fetchMyself(service) {
     store.dispatch({ type: MYSELF_FETCHING });
     service.get('//api.fallenlondon.com/api/character/myself')
       .then(({ data }) => {
-        // console.info('fetched myself!');
-        // console.info(data);
         store.dispatch({ type: MYSELF_SUCCESS, payload: data });
       });
   };
