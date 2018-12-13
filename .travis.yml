@@ -6,4 +6,4 @@ before_script:
 script:
   - yarn test
 after_success:
-  - cat coverage/lcov.ingo |./node_modules/coveralls/bin/coveralls.js
+  - cat coverage/lcov.info |./node_modules/coveralls/bin/coveralls.js
