@@ -1,11 +1,11 @@
 import { LOGGED_IN, LOGGED_OUT } from './action-types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   authenticated: false,
   characterId: undefined,
 };
 
-export default function reducer(state = INITIAL_STATE, { type, payload }) {
+export default function reducer(state = INITIAL_STATE, { type, payload } = {}) {
   switch (type) {
     case LOGGED_IN:
       return {
