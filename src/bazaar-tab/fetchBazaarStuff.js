@@ -1,18 +1,14 @@
 import axios from 'axios';
 
-import {
-  EXCHANGE_FETCHING,
-  EXCHANGE_SUCCESS,
-} from './action-types';
+import { EXCHANGE_FETCHING, EXCHANGE_SUCCESS } from './action-types';
+import { EXCHANGE_URL } from './constants';
 
 export default fetchBazaarStuff(axios);
 
 export function fetchBazaarStuff(service) {
-  return ({ store }) => {
+  return async ({ store }) => {
     store.dispatch({ type: EXCHANGE_FETCHING });
-    service.get('//api.fallenlondon.com/api/exchange/availabilities?shopid=null')
-      .then(({ data }) => {
-        store.dispatch({ type: EXCHANGE_SUCCESS, payload: data });
-      });
+    const { data } = await service.get(EXCHANGE_URL);
+    store.dispatch({ type: EXCHANGE_SUCCESS, payload: data });
   };
 }
