@@ -5,12 +5,19 @@ import {
   MYSELF_SUCCESS,
 } from '../action-types';
 
-const dispatch = jest.fn();
-const get = jest.fn(() => ({ data: {} }));
-const service = { get };
-const store = { dispatch };
-
 describe('fetchMyself', () => {
+  let dispatch;
+  let get;
+  let service;
+  let store;
+
+  beforeEach(() => {
+    dispatch = jest.fn();
+    get = jest.fn(() => ({ data: {} }));
+    service = { get };
+    store = { dispatch };
+  });
+
   it('calls service.get', async () => {
     await fetchMyself(service)({ store });
     expect(get).toHaveBeenCalledWith(MYSELF_URL);
