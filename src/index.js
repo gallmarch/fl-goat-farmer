@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 

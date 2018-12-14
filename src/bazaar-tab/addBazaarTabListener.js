@@ -5,6 +5,11 @@ import fetchBazaarStuff from './fetchBazaarStuff';
 import fetchMyself from '../myself/fetchMyself';
 import insertExtensionUI from '../extension-ui/insertExtensionUI';
 
+/**
+ * Listen for the addition of an .exchange__title element
+ * and add the extension UI to the DOM
+ * @param {*} param0
+ */
 export default function addBazaarTabListener({ store, storage }) {
   const rootNode = document.querySelector('body');
   const queries = [{
