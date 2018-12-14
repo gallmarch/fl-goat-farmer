@@ -4,6 +4,7 @@
   "description": "Add new categories of convertible items to the inventory",
   "author": "sdobuadhachain@gmail.com",
   "jest": {
+    "setupTestFrameworkScriptFile": "./setupTests.js",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
@@ -20,6 +21,8 @@
     "classnames": "^2.2.5",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.27.3",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^4.7.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "jquery": "3.1.1",
