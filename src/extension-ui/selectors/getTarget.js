@@ -1,10 +1,8 @@
 import { createSelector } from 'reselect';
 
-import getCharacterId from '../../auth/getCharacterId';
-
-const getTarget = ({ target }) => target[getCharacterId()];
+const getTarget = ({ target, auth: { characterId } }) => target[characterId];
 
 const inputs = [getTarget];
-const output = target => parseInt(target, 10) || 0;
+const output = target => parseFloat(target, 10) || 0;
 
 export default createSelector(inputs, output);
