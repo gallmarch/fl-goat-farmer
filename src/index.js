@@ -1,17 +1,16 @@
 import '@babel/polyfill';
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
 
 import addAuthListener from './auth/addAuthListener';
 import addBazaarTabListener from './bazaar-tab/addBazaarTabListener';
 import addExchangeItemChangeListener from './bazaar-tab/addExchangeItemChangeListener';
-import reducer from './reducer';
 import './styles.scss';
+
+import configureStore from './configureStore';
 
 import fetchBazaarStuff from './bazaar-tab/fetchBazaarStuff';
 import fetchMyself from './myself/fetchMyself';
 
-const store = applyMiddleware(thunk)(createStore)(reducer);
+const { store } = configureStore();
 
 addAuthListener({ store });
 addBazaarTabListener({ store });
