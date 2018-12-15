@@ -1,3 +1,4 @@
+import { TOGGLE_EXCLUSION } from '../action-types';
 import reducer, { INITIAL_STATE, toggleExclusion } from '../reducer';
 
 const mockCharacterId = 65536;
@@ -6,6 +7,11 @@ jest.mock('../../auth/getCharacterId', () => () => mockCharacterId);
 describe('exclusions/reducer', () => {
   it('has the expected initial state', () => {
     expect(reducer()).toEqual(INITIAL_STATE);
+  });
+  it('handles TOGGLE_EXCLUSION events', () => {
+    const action = { type: TOGGLE_EXCLUSION, payload: 100 };
+    expect(reducer(INITIAL_STATE, action))
+      .toEqual({ [mockCharacterId]: { 100: true } });
   });
 });
 
