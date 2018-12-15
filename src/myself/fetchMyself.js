@@ -5,7 +5,7 @@ import {
   MYSELF_SUCCESS,
 } from './action-types';
 
-export const MYSELF_URL = '//api.fallenlondon.com/api/character/myself';
+export const MYSELF_URL = 'https://api.fallenlondon.com/api/character/myself';
 
 export default fetchMyself(axios);
 
