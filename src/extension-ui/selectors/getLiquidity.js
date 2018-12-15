@@ -5,9 +5,9 @@ import { PENNY_QUALITY_ID } from '../constants';
 import getStuffThatSellsForPennies from './getStuffThatSellsForPennies';
 
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;
-const getExclusions = ({ exclusions }) => exclusions[getCharacterId()] || {};
+const getExclusions = ({ exclusions, auth: { characterId } }) => exclusions[characterId] || {};
 const getQualities = ({ myself: { qualities } }) => qualities;
-const getReserve = ({ reserve }) => reserve[getCharacterId()] || {};
+const getReserve = ({ reserve, auth: { characterId } }) => reserve[characterId] || {};
 
 const inputs = [getAvailabilities, getExclusions, getQualities, getReserve];
 
