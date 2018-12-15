@@ -4,7 +4,7 @@ import reducer, { INITIAL_STATE } from '../reducer';
 const mockCharacterId = 65536;
 jest.mock('../../auth/getCharacterId', () => () => mockCharacterId);
 
-describe('reducer', () => {
+describe('reserve/reducer', () => {
   it('has the expected initial state', () => {
     expect(reducer()).toEqual(INITIAL_STATE);
   });
