@@ -1,6 +1,5 @@
 import MutationSummary from 'mutation-summary';
 
-import { EXCLUSIONS_FETCHED } from '../persistence/action-types';
 import fetchBazaarStuff from './fetchBazaarStuff';
 import fetchMyself from '../myself/fetchMyself';
 import insertExtensionUI from '../extension-ui/insertExtensionUI';
@@ -10,7 +9,7 @@ import insertExtensionUI from '../extension-ui/insertExtensionUI';
  * and add the extension UI to the DOM
  * @param {*} param0
  */
-export default function addBazaarTabListener({ store, storage }) {
+export default function addBazaarTabListener({ store }) {
   const rootNode = document.querySelector('body');
   const queries = [{
     element: '.exchange__title',
@@ -18,11 +17,11 @@ export default function addBazaarTabListener({ store, storage }) {
   return new MutationSummary({
     rootNode,
     queries,
-    callback: makeCallback({ store, storage }),
+    callback: makeCallback({ store }),
   });
 }
 
-function makeCallback({ store, storage }) {
+function makeCallback({ store }) {
   return () => {
     // Return early if we're not on the right tab, or if we've already
     // inserted the extension UI
@@ -39,24 +38,6 @@ function makeCallback({ store, storage }) {
     fetchMyself({ store });
 
     // Add the extension UI
-    insertExtensionUI({ store, storage });
-
-    // Get exclusions for this character ID
-    const { auth: { characterId } } = store.getState();
-
-    // Fetch stuff from storage, then dispatch a Redux action
-    storage.get(characterId, (items) => {
-      let payload;
-      if (items[characterId]) {
-        payload = { ...items[characterId] };
-      } else {
-        payload = {
-          exclusions: {},
-          reserve: {},
-        };
-      }
-      // Dispatch an action
-      store.dispatch({ payload, type: EXCLUSIONS_FETCHED });
-    });
+    insertExtensionUI({ store });
   };
 }

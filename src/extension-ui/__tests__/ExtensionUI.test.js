@@ -7,7 +7,6 @@ describe('ExtensionUI', () => {
     shallow(<ExtensionUI
       dispatch={() => {}}
       liquidity={0}
-      storage={{}}
       target={0}
     />);
   });

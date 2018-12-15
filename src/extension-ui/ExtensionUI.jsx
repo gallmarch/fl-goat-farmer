@@ -7,8 +7,8 @@ import getLiquidity from './getLiquidity';
 import getTarget from './getTarget';
 import makeUpdateTarget from './makeUpdateTarget';
 
-export function ExtensionUI({ dispatch, liquidity, storage, target }) {
-  const updateTarget = makeUpdateTarget({ storage });
+export function ExtensionUI({ dispatch, liquidity, target }) {
+  const updateTarget = makeUpdateTarget();
   return (
     <div className="flgf__wealth-and-target">
       <div className="flgf__total-wealth">
@@ -40,7 +40,6 @@ export function ExtensionUI({ dispatch, liquidity, storage, target }) {
 ExtensionUI.propTypes = {
   dispatch: PropTypes.func.isRequired,
   liquidity: PropTypes.number.isRequired,
-  storage: PropTypes.shape({}).isRequired,
   target: PropTypes.number.isRequired,
 };
 

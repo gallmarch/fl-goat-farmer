@@ -11,12 +11,11 @@ import './styles.scss';
 import fetchBazaarStuff from './bazaar-tab/fetchBazaarStuff';
 import fetchMyself from './myself/fetchMyself';
 
-const storage = chrome.storage.local;
 const store = applyMiddleware(thunk)(createStore)(reducer);
 
-addAuthListener({ store, storage });
-addBazaarTabListener({ store, storage });
-addExchangeItemChangeListener({ store, storage });
+addAuthListener({ store });
+addBazaarTabListener({ store });
+addExchangeItemChangeListener({ store });
 
 // Listen for events from the background page
 chrome.runtime.onMessage.addListener(({ type }) => {

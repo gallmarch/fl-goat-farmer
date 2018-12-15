@@ -11,7 +11,7 @@ import isSellingMyThings from '../sticky-menu/isSellingMyThings';
  * displays, etc.
  * @param {Object} param0
  */
-export default function addExchangeItemChangeListener({ store, storage }) {
+export default function addExchangeItemChangeListener({ store }) {
   const rootNode = document.querySelector('body');
   const queries = [{ element: '*' }];
 
@@ -28,10 +28,10 @@ export default function addExchangeItemChangeListener({ store, storage }) {
     } = store.getState();
 
     // Make an el => el.onClick = () => {/* ... */} handler-creator
-    const makeIconClickHandler = makeMakeIconClickHandler({ store, storage });
+    const makeIconClickHandler = makeMakeIconClickHandler({ store });
 
     // Make a reserve-updating function
-    const updateReserve = makeUpdateReserve({ store, storage });
+    const updateReserve = makeUpdateReserve({ store });
 
     // Check which shop is active; if it's not "Sell my things" then return
     // const activeMenuItem = document.querySelector('.menu-item--active');
