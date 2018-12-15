@@ -1,11 +1,13 @@
 import { createSelector } from 'reselect';
-import { PENNY_QUALITY_ID } from './constants';
+
+import getCharacterId from '../../auth/getCharacterId';
+import { PENNY_QUALITY_ID } from '../constants';
 import getStuffThatSellsForPennies from './getStuffThatSellsForPennies';
 
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;
-const getExclusions = ({ persistence: { exclusions } }) => exclusions;
+const getExclusions = ({ exclusions, auth: { characterId } }) => exclusions[characterId] || {};
 const getQualities = ({ myself: { qualities } }) => qualities;
-const getReserve = ({ persistence: { reserve } }) => reserve;
+const getReserve = ({ reserve, auth: { characterId } }) => reserve[characterId] || {};
 
 const inputs = [getAvailabilities, getExclusions, getQualities, getReserve];
 

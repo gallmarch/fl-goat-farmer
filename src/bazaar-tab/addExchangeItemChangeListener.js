@@ -1,6 +1,7 @@
 /* eslint-disable no-alert, no-console */
 import MutationSummary from 'mutation-summary';
 
+import getCharacterId from '../auth/getCharacterId';
 import addReserveDisplay from '../reserve/addReserveDisplay';
 import makeMakeIconClickHandler from './makeMakeIconClickHandler';
 import makeUpdateReserve from '../reserve/makeUpdateReserve';
@@ -11,7 +12,7 @@ import isSellingMyThings from '../sticky-menu/isSellingMyThings';
  * displays, etc.
  * @param {Object} param0
  */
-export default function addExchangeItemChangeListener({ store, storage }) {
+export default function addExchangeItemChangeListener({ store }) {
   const rootNode = document.querySelector('body');
   const queries = [{ element: '*' }];
 
@@ -22,16 +23,17 @@ export default function addExchangeItemChangeListener({ store, storage }) {
   });
 
   function callback() {
+    const characterId = getCharacterId();
     // Get the current list of exclusions from store
     const {
-      persistence: { exclusions },
+      exclusions: { [characterId]: exclusions = {} },
     } = store.getState();
 
     // Make an el => el.onClick = () => {/* ... */} handler-creator
-    const makeIconClickHandler = makeMakeIconClickHandler({ store, storage });
+    const makeIconClickHandler = makeMakeIconClickHandler({ store });
 
     // Make a reserve-updating function
-    const updateReserve = makeUpdateReserve({ store, storage });
+    const updateReserve = makeUpdateReserve({ store });
 
     // Check which shop is active; if it's not "Sell my things" then return
     // const activeMenuItem = document.querySelector('.menu-item--active');
@@ -67,7 +69,7 @@ export default function addExchangeItemChangeListener({ store, storage }) {
       reserveButton.classList.add('button', 'button--tertiary', 'button--sm');
       reserveButton.innerText = 'Reserve';
       reserveButton.addEventListener('click', () => {
-        const { persistence: { reserve } } = store.getState();
+        const { reserve: { [characterId]: reserve = {} } } = store.getState();
         const amount = window.prompt('Enter the number of items you want to reserve.', reserve[qualityId] || 0);
         updateReserve({ qualityId, amount });
       });

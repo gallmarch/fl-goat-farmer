@@ -1,22 +1,20 @@
 import '@babel/polyfill';
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
 
 import addAuthListener from './auth/addAuthListener';
 import addBazaarTabListener from './bazaar-tab/addBazaarTabListener';
 import addExchangeItemChangeListener from './bazaar-tab/addExchangeItemChangeListener';
-import reducer from './reducer';
 import './styles.scss';
+
+import configureStore from './configureStore';
 
 import fetchBazaarStuff from './bazaar-tab/fetchBazaarStuff';
 import fetchMyself from './myself/fetchMyself';
 
-const storage = chrome.storage.local;
-const store = applyMiddleware(thunk)(createStore)(reducer);
+const { store } = configureStore();
 
-addAuthListener({ store, storage });
-addBazaarTabListener({ store, storage });
-addExchangeItemChangeListener({ store, storage });
+addAuthListener({ store });
+addBazaarTabListener({ store });
+addExchangeItemChangeListener({ store });
 
 // Listen for events from the background page
 chrome.runtime.onMessage.addListener(({ type }) => {

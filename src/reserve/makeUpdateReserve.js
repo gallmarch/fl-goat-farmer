@@ -1,30 +1,10 @@
-import { EXCLUSIONS_FETCHED } from '../persistence/action-types';
+// import { EXCLUSIONS_FETCHED } from '../persistence/action-types';
+import { RESERVE_UPDATED } from './action-types';
 
 const parseAmount = amount => amount;
 
-export default function makeUpdateReserve({ store, storage }) {
+export default function makeUpdateReserve({ store }) {
   return ({ amount, qualityId }) => {
-    const {
-      auth: { characterId },
-      persistence: { exclusions, reserve, target },
-    } = store.getState();
-
-    storage.set({
-      [characterId]: {
-        exclusions,
-        target,
-        reserve: {
-          ...reserve,
-          [qualityId]: parseAmount(amount),
-        },
-      },
-    });
-
-    storage.get(characterId, (stuff) => {
-      store.dispatch({
-        type: EXCLUSIONS_FETCHED,
-        payload: stuff[characterId],
-      });
-    });
+    store.dispatch({ type: RESERVE_UPDATED, payload: { qualityId, amount: parseAmount(amount) } });
   };
 }

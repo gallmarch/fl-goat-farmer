@@ -1,13 +1,16 @@
-import { PENNY_QUALITY_ID } from '../constants';
+import { PENNY_QUALITY_ID } from '../../constants';
 import getLiquidity from '../getLiquidity';
 
 describe('getLiquidity', () => {
   it('returns 0 if state is empty', () => {
-    expect(getLiquidity({
+    const state = {
+      auth: { characterId: 100 },
       exchange: { availabilities: [] },
-      persistence: {},
+      exclusions: {},
       myself: { qualities: [] },
-    })).toBe(0);
+      reserve: {},
+    };
+    expect(getLiquidity(state)).toBe(0);
   });
 
   it('returns the expected value if nothing is excluded', () => {
@@ -22,12 +25,11 @@ describe('getLiquidity', () => {
       { id: 1, level: 2 },
     ];
     const state = {
+      auth: { characterId: 100 },
       exchange: { availabilities },
       myself: { qualities },
-      persistence: {
-        exclusions: {},
-        reserve: {},
-      },
+      exclusions: {},
+      reserve: {},
     };
     expect(getLiquidity(state)).toBe(160);
   });
