@@ -1,4 +1,4 @@
-import { PENNY_QUALITY_ID } from './constants';
+import { PENNY_QUALITY_ID } from '../constants';
 
 export default (availabilities, exclusions) => availabilities
   .filter(({ availability: { quality: { id } } }) => !exclusions[id])

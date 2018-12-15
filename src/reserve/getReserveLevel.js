@@ -1,7 +1,7 @@
 import createCachedSelector from 're-reselect';
 
 const getQualityId = (state, { qualityId }) => qualityId;
-const getReserve = ({ persistence: { reserve } }) => reserve;
+const getReserve = ({ reserve, auth: { characterId } }) => reserve[characterId] || {};
 const cacheKey = getQualityId;
 
 const inputs = [getQualityId, getReserve];

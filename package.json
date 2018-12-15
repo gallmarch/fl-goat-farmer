@@ -39,6 +39,7 @@
     "react-scroll-to-component": "^1.0.2",
     "redux": "^3.7.2",
     "redux-localstorage": "^0.4.1",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
     "rimraf": "^2.6.1",

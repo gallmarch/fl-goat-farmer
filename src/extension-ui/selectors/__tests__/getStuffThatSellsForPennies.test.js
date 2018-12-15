@@ -1,4 +1,4 @@
-import { PENNY_QUALITY_ID } from '../constants';
+import { PENNY_QUALITY_ID } from '../../constants';
 import getStuffThatSellsForPennies from '../getStuffThatSellsForPennies';
 
 describe('getStuffThatSellsForPennies', () => {

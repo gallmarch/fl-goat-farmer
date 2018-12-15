@@ -3,12 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import getLiquidity from './getLiquidity';
-import getTarget from './getTarget';
-import makeUpdateTarget from './makeUpdateTarget';
+import getLiquidity from './selectors/getLiquidity';
+import getTarget from './selectors/getTarget';
+import updateTarget from '../target/updateTarget';
 
-export function ExtensionUI({ dispatch, liquidity, storage, target }) {
-  const updateTarget = makeUpdateTarget({ storage });
+export function ExtensionUI({ dispatch, liquidity, target }) {
   return (
     <div className="flgf__wealth-and-target">
       <div className="flgf__total-wealth">
@@ -28,7 +27,7 @@ export function ExtensionUI({ dispatch, liquidity, storage, target }) {
         </span>
         <button
           className="button--link button--link-inverse flgf__update-button"
-          onClick={() => dispatch(updateTarget)}
+          onClick={() => dispatch(updateTarget())}
         >
           (update)
         </button>
@@ -40,7 +39,6 @@ export function ExtensionUI({ dispatch, liquidity, storage, target }) {
 ExtensionUI.propTypes = {
   dispatch: PropTypes.func.isRequired,
   liquidity: PropTypes.number.isRequired,
-  storage: PropTypes.shape({}).isRequired,
   target: PropTypes.number.isRequired,
 };
 
