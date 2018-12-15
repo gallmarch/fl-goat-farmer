@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import getCharacterId from '../auth/getCharacterId';
-import { PENNY_QUALITY_ID } from './constants';
+import getCharacterId from '../../auth/getCharacterId';
+import { PENNY_QUALITY_ID } from '../constants';
 import getStuffThatSellsForPennies from './getStuffThatSellsForPennies';
 
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;

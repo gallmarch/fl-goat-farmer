@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import getLiquidity from './getLiquidity';
-import getTarget from './getTarget';
+import getLiquidity from './selectors/getLiquidity';
+import getTarget from './selectors/getTarget';
 import updateTarget from '../target/updateTarget';
 
 export function ExtensionUI({ dispatch, liquidity, target }) {

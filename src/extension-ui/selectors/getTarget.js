@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import getCharacterId from '../auth/getCharacterId';
+import getCharacterId from '../../auth/getCharacterId';
 
 const getTarget = ({ target }) => target[getCharacterId()];
 
