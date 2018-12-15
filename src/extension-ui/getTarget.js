@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 
-const getTarget = ({ persistence: { target } }) => target;
+import getCharacterId from '../auth/getCharacterId';
+
+const getTarget = ({ target }) => target[getCharacterId()];
 
 const inputs = [getTarget];
 const output = target => parseInt(target, 10) || 0;

@@ -1,6 +1,7 @@
 /* eslint-disable no-alert, no-console */
 import MutationSummary from 'mutation-summary';
 
+import getCharacterId from '../auth/getCharacterId';
 import addReserveDisplay from '../reserve/addReserveDisplay';
 import makeMakeIconClickHandler from './makeMakeIconClickHandler';
 import makeUpdateReserve from '../reserve/makeUpdateReserve';
@@ -22,9 +23,10 @@ export default function addExchangeItemChangeListener({ store }) {
   });
 
   function callback() {
+    const characterId = getCharacterId();
     // Get the current list of exclusions from store
     const {
-      persistence: { exclusions },
+      exclusions: { [characterId]: exclusions = {} },
     } = store.getState();
 
     // Make an el => el.onClick = () => {/* ... */} handler-creator

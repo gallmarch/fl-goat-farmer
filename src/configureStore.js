@@ -11,7 +11,7 @@ export default function configureStore() {
     storage,
     // We only want to persist exclusions and reserve to storage; everything
     // else is ephemeral
-    whitelist: ['exclusions', 'reserve'],
+    whitelist: ['exclusions', 'reserve', 'target'],
   };
   const persistedReducer = persistReducer(persistConfig, reducer);
 
