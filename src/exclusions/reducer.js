@@ -1,7 +1,7 @@
 import getCharacterId from '../auth/getCharacterId';
 import { TOGGLE_EXCLUSION } from './action-types';
 
-const INITIAL_STATE = {};
+export const INITIAL_STATE = {};
 
 export default function reducer(state = INITIAL_STATE, { type, payload } = {}) {
   switch (type) {
