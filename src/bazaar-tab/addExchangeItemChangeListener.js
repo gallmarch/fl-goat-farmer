@@ -69,7 +69,7 @@ export default function addExchangeItemChangeListener({ store }) {
       reserveButton.classList.add('button', 'button--tertiary', 'button--sm');
       reserveButton.innerText = 'Reserve';
       reserveButton.addEventListener('click', () => {
-        const { persistence: { reserve } } = store.getState();
+        const { reserve: { [characterId]: reserve = {} } } = store.getState();
         const amount = window.prompt('Enter the number of items you want to reserve.', reserve[qualityId] || 0);
         updateReserve({ qualityId, amount });
       });
