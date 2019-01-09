@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 import getLiquidity from './selectors/getLiquidity';
 import getTarget from './selectors/getTarget';
-import updateTarget from '../target/updateTarget';
+// import updateTarget from '../target/updateTarget';
 
-export function ExtensionUI({ dispatch, liquidity, target }) {
+export function ExtensionUI({ liquidity, onClick, target }) {
   return (
     <div className="flgf__wealth-and-target">
       <div className="flgf__total-wealth">
@@ -27,7 +27,8 @@ export function ExtensionUI({ dispatch, liquidity, target }) {
         </span>
         <button
           className="button--link button--link-inverse flgf__update-button"
-          onClick={() => dispatch(updateTarget())}
+          onClick={onClick}
+          // onClick={() => dispatch(updateTarget())}
         >
           (update)
         </button>
@@ -37,8 +38,8 @@ export function ExtensionUI({ dispatch, liquidity, target }) {
 }
 
 ExtensionUI.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   liquidity: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
   target: PropTypes.number.isRequired,
 };
 
