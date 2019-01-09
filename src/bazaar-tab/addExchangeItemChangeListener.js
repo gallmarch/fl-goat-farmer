@@ -3,8 +3,8 @@ import MutationSummary from 'mutation-summary';
 
 import getCharacterId from '../auth/getCharacterId';
 import addReserveDisplay from '../reserve/addReserveDisplay';
+import makeCreateReserveButton from './makeCreateReserveButton';
 import makeMakeIconClickHandler from './makeMakeIconClickHandler';
-import makeUpdateReserve from '../reserve/makeUpdateReserve';
 import isSellingMyThings from '../sticky-menu/isSellingMyThings';
 
 /**
@@ -32,12 +32,11 @@ export default function addExchangeItemChangeListener({ store }) {
     // Make an el => el.onClick = () => {/* ... */} handler-creator
     const makeIconClickHandler = makeMakeIconClickHandler({ store });
 
-    // Make a reserve-updating function
-    const updateReserve = makeUpdateReserve({ store });
-
     // Check which shop is active; if it's not "Sell my things" then return
     // const activeMenuItem = document.querySelector('.menu-item--active');
     const sellMyThingsIsActive = isSellingMyThings();
+
+    const createReserveButton = makeCreateReserveButton({ characterId, store });
 
     // Iterate over shop items, giving each a click listener
     [...document.querySelectorAll('.shop__item')].forEach((el) => {
@@ -64,15 +63,7 @@ export default function addExchangeItemChangeListener({ store }) {
       el.querySelector('.icon > div').addEventListener('click', onIconClick);
 
       // Add a reserve button + onclick (i.e., an arbitrary quantity of this item is reserved)
-      const reserveButton = document.createElement('button');
-      el.querySelector('.item__controls').insertBefore(reserveButton, el.querySelector('js-bazaar-sell'));
-      reserveButton.classList.add('button', 'button--tertiary', 'button--sm');
-      reserveButton.innerText = 'Reserve';
-      reserveButton.addEventListener('click', () => {
-        const { reserve: { [characterId]: reserve = {} } } = store.getState();
-        const amount = window.prompt('Enter the number of items you want to reserve.', reserve[qualityId] || 0);
-        updateReserve({ qualityId, amount });
-      });
+      createReserveButton({ el, qualityId });
 
       // Add a 'Reserved: ' display
       addReserveDisplay({ el, qualityId, store });
