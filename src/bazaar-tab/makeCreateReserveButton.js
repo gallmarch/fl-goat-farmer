@@ -15,6 +15,9 @@ export default function makeCreateReserveButton({ characterId, store }) {
         'Enter the number of items you want to reserve.',
         reserve[qualityId] || 0,
       );
+      if (amount === null) {
+        return;
+      }
       updateReserve({ qualityId, amount });
     });
   };
