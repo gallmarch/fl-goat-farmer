@@ -30,7 +30,7 @@ export default function insertExtensionUI({ store }) {
     if (target === null) {
       return;
     }
-    store.dispatch(updateTarget(parseFloat(target)));
+    updateTarget(parseFloat(target));
   };
 
   container.id = 'flgf-root';
