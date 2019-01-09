@@ -24,7 +24,7 @@ export default function insertExtensionUI({ store }) {
     const { auth: { characterId } } = store.getState();
     const target = window.prompt(
       PROMPT_TEXT,
-      store.getState().target[characterId] || 0,
+      (store.getState().target[characterId] || 0).toFixed(2),
     );
     // If the user has cancelled, then return
     if (target === null) {
