@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Fallen London Goat Farmer's Extension II: Electric Goataloo",
+  "name": "Fallen London Goat Farmer's Extension",
   "description": "This extension calculates and displays your total wealth each time you visit the Bazaar page in Fallen London.",
   "permissions": [
     "webRequest",
@@ -15,7 +15,6 @@
   "content_scripts": [
     {
       "matches": [
-        "http://fallenlondon.storynexus.com/Gap/Load*",
         "https://*.fallenlondon.com/*"
       ],
       "css": [
