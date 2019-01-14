@@ -24,13 +24,13 @@ export default function insertExtensionUI({ store }) {
     const { auth: { characterId } } = store.getState();
     const target = window.prompt(
       PROMPT_TEXT,
-      (store.getState().target[characterId] || 0).toFixed(2),
+      getTargetOrDefault({ store, characterId }),
     );
     // If the user has cancelled, then return
     if (target === null) {
       return;
     }
-    updateTarget(parseFloat(target));
+    updateTarget(parseFloatAndClamp(target));
   };
 
   container.id = 'flgf-root';
@@ -41,4 +41,12 @@ export default function insertExtensionUI({ store }) {
     </Provider>,
     container,
   );
+}
+
+export function parseFloatAndClamp(target) {
+  return Math.max(parseFloat(target), 0) || 0;
+}
+
+export function getTargetOrDefault({ store, characterId }) {
+  return (store.getState().target[characterId] || 0).toFixed(2);
 }
