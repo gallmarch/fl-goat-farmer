@@ -25,7 +25,9 @@ function makeCallback({ store }) {
   return () => {
     // Return early if we're not on the right tab, or if we've already
     // inserted the extension UI
-    const isActive = !!document.querySelector('[data-name="bazaar"].nav__item.active');
+    const isActive = !!document.querySelector(
+      '[data-name="bazaar"].nav__item.active, [data-name="bazaar"].footer-menu__item.active',
+    );
     const existingElement = !!document.querySelector('#flgf-root');
     if (!isActive || existingElement) {
       return;
