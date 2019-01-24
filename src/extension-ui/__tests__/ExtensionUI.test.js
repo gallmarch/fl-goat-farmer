@@ -8,6 +8,7 @@ describe('ExtensionUI', () => {
       dispatch={() => {}}
       liquidity={0}
       target={0}
+      onClick={() => {}}
     />);
   });
 });
