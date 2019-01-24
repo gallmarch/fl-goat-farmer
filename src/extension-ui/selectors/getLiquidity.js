@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import getCharacterId from '../../auth/getCharacterId';
 import { PENNY_QUALITY_ID } from '../constants';
+import getConvertedSpecialCases from './getConvertedSpecialCases';
 import getStuffThatSellsForPennies from './getStuffThatSellsForPennies';
 
 const getAvailabilities = ({ exchange: { availabilities } }) => availabilities;
@@ -18,9 +18,14 @@ const output = (availabilities, exclusions, qualities, reserve) => {
   // Get stuff that sells for Pennies (e.g., not Memories of Light) that isn't excluded
   const stuffThatSellsForPennies = getStuffThatSellsForPennies(availabilities, exclusions);
 
+  const convertedSpecialCases = getConvertedSpecialCases(availabilities, exclusions);
+
   // Tot up its value
   const reduceFn = makeReducer(qualities, reserve);
-  const valueOfSellableStuff = stuffThatSellsForPennies.reduce(reduceFn, 0);
+  const valueOfSellableStuff = [
+    ...stuffThatSellsForPennies,
+    ...convertedSpecialCases,
+  ].reduce(reduceFn, 0);
 
   // Return the sum
   return valueOfSellableStuff + pennies;
