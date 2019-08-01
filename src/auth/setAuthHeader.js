@@ -1,5 +1,14 @@
 /* eslint-disable no-param-reassign, camelcase */
 
+import { AUTHORIZATION_HEADER_CHANGED } from './action-types';
+
+let authorizationHeader;
+
 export default function setAuthHeader({ access_token, axios }) {
-  axios.defaults.headers.common.Authorization = `Bearer ${access_token.replace(/"/g, '')}`;
+  const header = `Bearer ${access_token.replace(/"/g, '')}`;
+  axios.defaults.headers.common.Authorization = header;
+  if (header !== authorizationHeader) {
+    chrome.runtime.sendMessage({ type: AUTHORIZATION_HEADER_CHANGED, payload: header });
+  }
+  authorizationHeader = header;
 }
