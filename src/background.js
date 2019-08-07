@@ -1,13 +1,32 @@
 import axios from 'axios';
 import { AUTHORIZATION_HEADER_CHANGED } from './auth/action-types';
 import { EXCHANGE_URL } from './bazaar-tab/constants';
-import { EXCHANGE_SUCCESS, FETCH_EXCHANGE_REQUESTED } from './bazaar-tab/action-types';
+import { EXCHANGE_SUCCESS, FETCH_EXCHANGE_REQUESTED, TRANSACTION_COMPLETE } from './bazaar-tab/action-types';
 import { MYSELF_URL } from './myself/fetchMyself';
 import { FETCH_MYSELF_REQUESTED, MYSELF_SUCCESS } from './myself/action-types';
 
 let authorizationHeader;
 
+const urls = [
+  '*://*.api.fallenlondon.com/api/exchange/sell',
+  '*://api.fallenlondon.com/api/exchange/sell',
+  '*://*.api.fallenlondon.com/api/exchange/buy',
+  '*://api.fallenlondon.com/api/exchange/buy',
+];
+
+chrome.webRequest.onCompleted.addListener(onTransactionComplete, { urls });
 chrome.runtime.onMessage.addListener(onRuntimeMessage);
+
+function onTransactionComplete() {
+  chrome.tabs.query(
+    { active: true, currentWindow: true },
+    (tabs) => {
+      tabs.forEach(({ id }) => {
+        chrome.tabs.sendMessage(id, { type: TRANSACTION_COMPLETE });
+      });
+    },
+  );
+}
 
 /**
  * Listener for messages from the content script
