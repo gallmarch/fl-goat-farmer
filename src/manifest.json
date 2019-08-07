@@ -9,13 +9,13 @@
   ],
   "version": "VERSION",
   "background": {
-    "scripts": ["background.js"],
-    "persistent": true
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
       "matches": [
-        "https://*.fallenlondon.com/*"
+        "https://*.fallenlondon.com/*",
+        "https://.fallenlondon.com/*"
       ],
       "css": [
         "styles.css"

@@ -1,9 +1,23 @@
 import unsetAuthHeader from '../unsetAuthHeader';
+import setAuthHeader from '../setAuthHeader';
 
 describe('unsetAuthHeader', () => {
+  beforeEach(() => {
+    const sendMessage = () => true;
+    const chrome = { runtime: { sendMessage } };
+    setAuthHeader({ chrome, access_token: 'some initial access token' });
+  });
+
+  afterAll(() => {
+    const sendMessage = () => true;
+    const chrome = { runtime: { sendMessage } };
+    unsetAuthHeader({ chrome });
+  });
+
   it('removes the Authorization header', () => {
-    const axios = { defaults: { headers: { common: { Authorization: 'Bearer: be-sure-to-drink-your-ovaltine' } } } };
-    unsetAuthHeader({ axios });
-    expect(axios.defaults.headers.common.Authorization).toBe(undefined);
+    const sendMessage = jest.fn();
+    const chrome = { runtime: { sendMessage } };
+    unsetAuthHeader({ chrome });
+    expect(sendMessage).toHaveBeenCalled();
   });
 });

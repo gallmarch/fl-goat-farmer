@@ -9,7 +9,7 @@ import insertExtensionUI from '../extension-ui/insertExtensionUI';
  * and add the extension UI to the DOM
  * @param {*} param0
  */
-export default function addBazaarTabListener({ store }) {
+export default function addBazaarTabListener({ chrome, store }) {
   const rootNode = document.querySelector('body');
   const queries = [{
     element: '.exchange__title',
@@ -17,11 +17,11 @@ export default function addBazaarTabListener({ store }) {
   return new MutationSummary({
     rootNode,
     queries,
-    callback: makeCallback({ store }),
+    callback: makeCallback({ chrome, store }),
   });
 }
 
-function makeCallback({ store }) {
+function makeCallback({ chrome, store }) {
   return () => {
     // Return early if we're not on the right tab, or if we've already
     // inserted the extension UI
@@ -34,10 +34,10 @@ function makeCallback({ store }) {
     }
 
     // Retrieve bazaar info
-    fetchBazaarStuff({ store });
+    fetchBazaarStuff({ chrome, store });
 
     // Fetch character data
-    fetchMyself({ store });
+    fetchMyself({ chrome, store });
 
     // Add the extension UI
     insertExtensionUI({ store });

@@ -1,31 +1,10 @@
-import { MYSELF_URL, fetchMyself } from '../fetchMyself';
-
-import {
-  MYSELF_FETCHING,
-  MYSELF_SUCCESS,
-} from '../action-types';
+import fetchMyself from '../fetchMyself';
 
 describe('fetchMyself', () => {
-  let dispatch;
-  let get;
-  let service;
-  let store;
-
-  beforeEach(() => {
-    dispatch = jest.fn();
-    get = jest.fn(() => ({ data: {} }));
-    service = { get };
-    store = { dispatch };
-  });
-
-  it('calls service.get', async () => {
-    await fetchMyself(service)({ store });
-    expect(get).toHaveBeenCalledWith(MYSELF_URL);
-  });
-
-  it('dispatches actions', async () => {
-    await fetchMyself(service)({ store });
-    expect(dispatch).toHaveBeenCalledWith({ type: MYSELF_FETCHING });
-    expect(dispatch).toHaveBeenCalledWith({ type: MYSELF_SUCCESS, payload: {} });
+  it('calls sendMessage', async () => {
+    const sendMessage = jest.fn();
+    const chrome = { runtime: { sendMessage } };
+    await fetchMyself(chrome);
+    expect(sendMessage).toHaveBeenCalled();
   });
 });

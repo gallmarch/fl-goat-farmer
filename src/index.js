@@ -12,15 +12,18 @@ import fetchMyself from './myself/fetchMyself';
 
 const { store } = configureStore();
 
-addAuthListener({ store });
-addBazaarTabListener({ store });
-addExchangeItemChangeListener({ store });
-
 // Listen for events from the background page
-chrome.runtime.onMessage.addListener(({ type }) => {
+chrome.runtime.onMessage.addListener((message) => {
   // If a transaction has just completed, then re-fetch data
-  if (type === 'TRANSACTION_COMPLETE') {
-    fetchMyself({ store });
-    fetchBazaarStuff({ store });
+  if (message.type === 'TRANSACTION_COMPLETE') {
+    fetchMyself();
+    fetchBazaarStuff();
+    return;
   }
+  store.dispatch(message);
 });
+
+addAuthListener({ chrome, store });
+addBazaarTabListener({ chrome, store });
+addExchangeItemChangeListener({ chrome, store });
+

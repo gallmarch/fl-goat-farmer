@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 
-export default function unsetAuthHeader({ axios }) {
-  delete axios.defaults.headers.common.Authorization;
+import setAuthHeader from './setAuthHeader';
+
+export default function unsetAuthHeader({ chrome }) {
+  setAuthHeader({ chrome, access_token: undefined });
 }

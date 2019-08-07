@@ -4,7 +4,7 @@ import unsetAuthHeader from './unsetAuthHeader';
 import { login, logout } from './actions';
 import getCharacterId from './getCharacterId';
 
-export default function makeCheckLocalStorage({ axios, store }) {
+export default function makeCheckLocalStorage({ chrome, store }) {
   return function checkLocalStorage() {
     // Check for an access token
     // const { access_token } = window.localStorage;
@@ -12,12 +12,12 @@ export default function makeCheckLocalStorage({ axios, store }) {
 
     // If we have one, set the Authorization header
     if (access_token) {
-      setAuthHeader({ access_token, axios });
+      setAuthHeader({ access_token, chrome });
       return login(getCharacterId(access_token))(store.dispatch);
     }
 
     // Otherwise, ensure that the Authorization header is unset
-    unsetAuthHeader({ axios });
+    unsetAuthHeader({ chrome });
     return logout()(store.dispatch);
   };
 }
