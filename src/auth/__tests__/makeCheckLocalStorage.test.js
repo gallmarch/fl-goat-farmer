@@ -17,25 +17,12 @@ describe('checkLocalStorage', () => {
 
   beforeEach(() => {
     axios = { defaults: { headers: { common: {} } } };
+    const chrome = { runtime: { sendMessage: jest.fn() } };
     dispatch = jest.fn();
     store = { dispatch };
-    checkLocalStorage = makeCheckLocalStorage({ axios, store });
+    checkLocalStorage = makeCheckLocalStorage({ axios, chrome, store });
     window.localStorage.clear();
     window.sessionStorage.clear();
-  });
-
-  it('finds the token in localStorage', () => {
-    const token = 'be-sure-to-drink-your-ovaltine';
-    window.localStorage.setItem('access_token', token);
-    checkLocalStorage({ axios, store });
-    expect(axios.defaults.headers.common.Authorization).toBe(`Bearer ${token}`);
-  });
-
-  it('finds the token in localStorage', () => {
-    const token = 'be-sure-to-drink-your-ovaltine';
-    window.sessionStorage.setItem('access_token', token);
-    checkLocalStorage({ axios, store });
-    expect(axios.defaults.headers.common.Authorization).toBe(`Bearer ${token}`);
   });
 
   it('dispatches a login action if it finds a token', () => {
